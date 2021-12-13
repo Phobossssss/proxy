@@ -26,7 +26,7 @@ if (magicJS.read(blackKey)) {
             if (item.hasOwnProperty("banner_item")) {
               let bannerItems = [];
               for (let banner of item["banner_item"]) {
-                if (banner["type"] === "将减少展示此类广告") {
+                if (banner["type"] === "ad") {
                   continue;
                 } else if (banner["static_banner"] && banner["static_banner"]["is_ad_loc"] != true) {
                   bannerItems.push(banner);
