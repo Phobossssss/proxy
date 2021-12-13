@@ -22,7 +22,7 @@ if (magicJS.read(blackKey)) {
         try {
           let obj = JSON.parse(magicJS.response.body);
           let items = [];
-         /*
+        
 
 for (let item of obj["data"]["items"]) {
             if (item.hasOwnProperty("banner_item")) {
@@ -45,7 +45,6 @@ for (let item of obj["data"]["items"]) {
           magicJS.logError(`推荐去广告出现异常：${err}`);
         }
 
-*/
         break;
       // 匹配story模式，用于记录Story的aid
       case /^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\/story\?/.test(magicJS.request.url):
