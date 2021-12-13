@@ -26,7 +26,7 @@ if (magicJS.read(blackKey)) {
             if (item.hasOwnProperty("banner_item")) {
               let bannerItems = [];
               for (let banner of item["banner_item"]) {
-                if (banner["type"] === "将减少相似广告推荐" && banner["type"] != "large_cover_v1") {
+                if (banner["type"] === "将减少相似广告推荐" ) {
                   continue;
                 }
               }
@@ -35,13 +35,6 @@ if (magicJS.read(blackKey)) {
                 item["banner_item"] = bannerItems;
                 items.push(item);
               }
-            } else if (
-              !item.hasOwnProperty("ad_info") &&
-              !blacklist.includes(item["args"]["up_name"]) &&
-              item.card_goto.indexOf("ad") === -1 &&
-              (item["card_type"] === "small_cover_v2" || item["card_type"] === "small_cover_v9" || item["card_type"] === "large_cover_v1")
-            ) {
-              items.push(item);
             }
           }
           obj["data"]["items"] = items;
