@@ -31,7 +31,10 @@ if (magicJS.read(blackKey)) {
                 }
               }
               // 去除广告后，如果banner大于等于1个才添加到响应体
-             
+             if (bannerItems.length >= 1) {
+                item["banner_item"] = bannerItems;
+                items.push(item);
+              }
             }
           }
           obj["data"]["items"] = items;
