@@ -22,21 +22,28 @@ if (magicJS.read(blackKey)) {
         try {
           let obj = JSON.parse(magicJS.response.body);
           let items = [];
-        
-
- for (let item of obj["data"]["items"]) {
+          for (let item of obj["data"]["items"]) {
             if (item.hasOwnProperty("banner_item")) {
               let bannerItems = [];
               for (let banner of item["banner_item"]) {
-                if (banner["type"] === "将减少相似广告推荐") {
+                if (banner["type"] === "将减少展示此类广告"") {
                   continue;
+                } else if (banner["static_banner"] && banner["static_banner"]["is_ad_loc"] != true) {
+                  bannerItems.push(banner);
                 }
               }
-             // 去除广告后，如果banner大于等于1个才添加到响应体
+              // 去除广告后，如果banner大于等于1个才添加到响应体
               if (bannerItems.length >= 1) {
                 item["banner_item"] = bannerItems;
                 items.push(item);
               }
+            } else if (
+              !item.hasOwnProperty("ad_info") &&
+              !blacklist.includes(item["args"]["up_name"]) &&
+              item.card_goto.indexOf("ad") === -1 &&
+              (item["card_type"] === "small_cover_v2" || item["card_type"] === "large_cover_v1")
+            ) {
+              items.push(item);
             }
           }
           obj["data"]["items"] = items;
@@ -44,7 +51,6 @@ if (magicJS.read(blackKey)) {
         } catch (err) {
           magicJS.logError(`推荐去广告出现异常：${err}`);
         }
-
         break;
       // 匹配story模式，用于记录Story的aid
       case /^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\/story\?/.test(magicJS.request.url):
