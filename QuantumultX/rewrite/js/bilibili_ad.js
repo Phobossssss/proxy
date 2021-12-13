@@ -28,8 +28,6 @@ if (magicJS.read(blackKey)) {
               for (let banner of item["banner_item"]) {
                 if (banner["type"] === "将减少展示此类广告") {
                   continue;
-                } else if (banner["static_banner"] && banner["static_banner"]["is_ad_loc"] != true) {
-                  bannerItems.push(banner);
                 }
               }
               // 去除广告后，如果banner大于等于1个才添加到响应体
@@ -37,13 +35,6 @@ if (magicJS.read(blackKey)) {
                 item["banner_item"] = bannerItems;
                 items.push(item);
               }
-            } else if (
-              !item.hasOwnProperty("ad_info") &&
-              !blacklist.includes(item["args"]["up_name"]) &&
-              item.card_goto.indexOf("ad") === -1 &&
-              (item["card_type"] === "small_cover_v2" || item["card_type"] === "large_cover_v1")
-            ) {
-              items.push(item);
             }
           }
           obj["data"]["items"] = items;
