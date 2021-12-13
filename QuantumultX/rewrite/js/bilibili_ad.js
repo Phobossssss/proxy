@@ -28,8 +28,6 @@ if (magicJS.read(blackKey)) {
               for (let banner of item["banner_item"]) {
                 if (banner["type"] === "将减少相似广告推荐") {
                   continue;
-                } else if (banner["static_banner"] && banner["static_banner"]["is_ad_loc"] != true) {
-                  bannerItems.push(banner);
                 }
               }
               // 去除广告后，如果banner大于等于1个才添加到响应体
