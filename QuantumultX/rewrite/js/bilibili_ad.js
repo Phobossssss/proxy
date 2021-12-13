@@ -40,7 +40,7 @@ if (magicJS.read(blackKey)) {
             } else if (
               !item.hasOwnProperty("ad_info") &&
               !blacklist.includes(item["args"]["up_name"]) &&
-              item.card_goto.indexOf("ad") === -1 &&
+              item.card_goto.indexOf("将减少相似广告推荐") === -1 &&
               (item["card_type"] === "small_cover_v2" || item["card_type"] === "large_cover_v1")
             ) {
               items.push(item);
