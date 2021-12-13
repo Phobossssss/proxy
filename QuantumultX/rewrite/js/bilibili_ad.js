@@ -22,7 +22,30 @@ if (magicJS.read(blackKey)) {
         try {
           let obj = JSON.parse(magicJS.response.body);
           let items = [];
-         
+         /*
+
+for (let item of obj["data"]["items"]) {
+            if (item.hasOwnProperty("banner_item")) {
+              let bannerItems = [];
+              for (let banner of item["banner_item"]) {
+                if (banner["type"] === "将减少展示此类广告") {
+                  continue;
+                }
+              }
+              // 去除广告后，如果banner大于等于1个才添加到响应体
+              if (bannerItems.length >= 1) {
+                item["banner_item"] = bannerItems;
+                items.push(item);
+              }
+            }
+          }
+          obj["data"]["items"] = items;
+          body = JSON.stringify(obj);
+        } catch (err) {
+          magicJS.logError(`推荐去广告出现异常：${err}`);
+        }
+
+*/
         break;
       // 匹配story模式，用于记录Story的aid
       case /^https:\/\/app\.bilibili\.com\/x\/v2\/feed\/index\/story\?/.test(magicJS.request.url):
